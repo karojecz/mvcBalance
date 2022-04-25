@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Balance{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<h1>{{ title }}</h1>
+	</div>
+	
+
+				{% if current_user %}
+					
+								<div class="row">
+									<table class="table table-bordered">
+									 <caption>incomes</caption>
+									  <tr>
+										<th>Amount</th>
+										<th>date</th>
+										<th>comment</th>
+										
+									  </tr>
+									  
+											  {% for sum in income_sums %}
+													<th>  {{ sum.name }} </th>
+													
+															{% for income in incomes %}
+															 
+																{% if sum.name==income.category  %}
+																	<tr>
+																		<td>{{ income.amount }}</td>
+																		<td>{{ income.date }}</td>
+																		<td>{{ income.comment }}</td>
+																	</tr>	
+																 {% endif %} 
+															{% endfor %}
+													<tr>
+														<td colspan="3">sum: {{ sum.sum }}</td>
+													</tr>	
+																
+												{% endfor %}
+									</table>
+									
+									<table class="table table-bordered">
+									 <caption>expenses</caption>
+									  <tr>
+										<th>Amount</th>
+										<th>date</th>
+										<th>comment</th>
+										
+									  </tr>
+									  
+											  {% for sum in expense_sums %}
+													<th>  {{ sum.name }} </th>
+													
+															{% for expense in expenses %}
+															 
+																{% if sum.name==expense.category  %}
+																	<tr>
+																		<td>{{ expense.amount }}</td>
+																		<td>{{ expense.date }}</td>
+																		<td>{{ expense.comment }}</td>
+																	</tr>	
+																{% endif %}	  
+															{% endfor %}
+													<tr>
+														<td colspan="3">sum: {{ sum.sum }}</td>
+													</tr>	
+																
+												{% endfor %}
+									</table>
+								</div>
+
+
+
+											
+
+
+											
+
+
+					
+								
+								<div class="row">
+									<div id="piechart"></div>
+								</div>
+
+				
+					
+
+
+
+				   
+				{% else %}
+					<a href="/signup/new">Sign up</a> or <a href="/login">log in</a>.
+				{% endif %}
+</div>
+{% endblock %}

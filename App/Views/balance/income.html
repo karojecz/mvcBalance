@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Income{% endblock %}
+
+{% block body %}
+
+    <h1>Add income</h1>
+	
+	   {% if income.errors is not empty %}
+        <p>Errors:</p>
+        <ul>
+            {% for error in income.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if current_user %}
+       
+
+	<form action="/balance/createIncome" method="post">
+		<div class="row  p-2 bg-light border">
+				{% for category in categorys %}
+					<div class="col-md-4 ">
+						<div class="form-check">
+						  
+						  <label class="form-check-label" ><input type="radio" class="form-check-input" id="radio1" name="category" value="{{ category.name }}" checked>{{ category.name }}</label>
+						</div>
+					</div>
+
+				{% endfor %}
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+						<div class="form group">
+						<div class="p-2">
+							<label for="incomeAmount" >Amount</label>
+							<input class="form-control" type="number" step="0.01" id="incomeAmount" name="amount"   value="{{ expense.amount }}" required/>
+						</div>
+						</div>
+						
+
+						<div class="form group">
+						<div class="p-2">
+						<label for="date" >date of expense:</label>
+						<input class="form-control"type="text" id="date" name="date" 
+						value={{ time }}  placeholder="{{ time }}" onfocus="(this.type='date')"/>
+						</div>
+						</div>
+			</div>
+			<div class="col-md-8">
+			<div class="p-2">
+						<label for="Textarea2" class="form-label">Comment:</label>
+						<textarea class="form-control" id="Textarea2" rows="4" cols="50" name="income_comment" >
+						</textarea>
+			</div>			
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+						<button class="btn btn-primary"type='submit'>Add income</button>
+			</div>
+		</div>
+						
+      </form>
+    {% else %}
+        <a href="/signup/new">Sign up</a> or <a href="/login">log in</a>.
+    {% endif %}
+	
+
+{% endblock %}

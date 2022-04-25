@@ -1,0 +1,5 @@
+Account activation
+
+Thank you for signing up. pLEASE CLICK LINK TO ACTIVATE YOUR ACCOUNT:
+
+{{ url }}
