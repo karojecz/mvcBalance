@@ -42,6 +42,7 @@ class Login extends \Core\Controller
 
             Flash::addMessage('Login successful');
 
+            
             $this->redirect(Auth::getReturnToPage());
 			
 		

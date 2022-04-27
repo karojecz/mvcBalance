@@ -1,0 +1,79 @@
+[26-Apr-2022 19:55:07 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'karoljec_home-budget-admin'@'localhost' (using password: YES)'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Model.php(27): PDO->__construct()
+#1 C:\Program Files\Ampps\www\App\Models\User.php(241): Core\Model::getDB()
+#2 C:\Program Files\Ampps\www\App\Auth.php(100): App\Models\User::findByID()
+#3 C:\Program Files\Ampps\www\Core\View.php(53): App\Auth::getUser()
+#4 C:\Program Files\Ampps\www\Core\View.php(35): Core\View::getTemplate()
+#5 C:\Program Files\Ampps\www\App\Controllers\Home.php(23): Core\View::renderTemplate()
+#6 [internal function]: App\Controllers\Home->indexAction()
+#7 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#8 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#9 C:\Program Files\Ampps\www\public\index.php(43): Core\Router->dispatch()
+#10 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Model.php' on line 27
+[26-Apr-2022 19:55:57 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [2002] Nie można nawiązać połączenia, ponieważ komputer docelowy aktywnie go odmawia.
+'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Model.php(27): PDO->__construct()
+#1 C:\Program Files\Ampps\www\App\Models\User.php(241): Core\Model::getDB()
+#2 C:\Program Files\Ampps\www\App\Auth.php(100): App\Models\User::findByID()
+#3 C:\Program Files\Ampps\www\Core\View.php(53): App\Auth::getUser()
+#4 C:\Program Files\Ampps\www\Core\View.php(35): Core\View::getTemplate()
+#5 C:\Program Files\Ampps\www\App\Controllers\Home.php(23): Core\View::renderTemplate()
+#6 [internal function]: App\Controllers\Home->indexAction()
+#7 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#8 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#9 C:\Program Files\Ampps\www\public\index.php(43): Core\Router->dispatch()
+#10 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Model.php' on line 27
+[26-Apr-2022 19:56:01 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'karoljec_home-budget-admin'@'localhost' (using password: YES)'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Model.php(27): PDO->__construct()
+#1 C:\Program Files\Ampps\www\App\Models\User.php(241): Core\Model::getDB()
+#2 C:\Program Files\Ampps\www\App\Auth.php(100): App\Models\User::findByID()
+#3 C:\Program Files\Ampps\www\Core\View.php(53): App\Auth::getUser()
+#4 C:\Program Files\Ampps\www\Core\View.php(35): Core\View::getTemplate()
+#5 C:\Program Files\Ampps\www\App\Controllers\Home.php(23): Core\View::renderTemplate()
+#6 [internal function]: App\Controllers\Home->indexAction()
+#7 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#8 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#9 C:\Program Files\Ampps\www\public\index.php(43): Core\Router->dispatch()
+#10 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Model.php' on line 27
+[26-Apr-2022 19:56:03 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'karoljec_home-budget-admin'@'localhost' (using password: YES)'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Model.php(27): PDO->__construct()
+#1 C:\Program Files\Ampps\www\App\Models\User.php(241): Core\Model::getDB()
+#2 C:\Program Files\Ampps\www\App\Auth.php(100): App\Models\User::findByID()
+#3 C:\Program Files\Ampps\www\Core\View.php(53): App\Auth::getUser()
+#4 C:\Program Files\Ampps\www\Core\View.php(35): Core\View::getTemplate()
+#5 C:\Program Files\Ampps\www\App\Controllers\Home.php(23): Core\View::renderTemplate()
+#6 [internal function]: App\Controllers\Home->indexAction()
+#7 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#8 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#9 C:\Program Files\Ampps\www\public\index.php(43): Core\Router->dispatch()
+#10 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Model.php' on line 27
+[26-Apr-2022 19:56:03 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'karoljec_home-budget-admin'@'localhost' (using password: YES)'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Model.php(27): PDO->__construct()
+#1 C:\Program Files\Ampps\www\App\Models\User.php(241): Core\Model::getDB()
+#2 C:\Program Files\Ampps\www\App\Auth.php(100): App\Models\User::findByID()
+#3 C:\Program Files\Ampps\www\Core\View.php(53): App\Auth::getUser()
+#4 C:\Program Files\Ampps\www\Core\View.php(35): Core\View::getTemplate()
+#5 C:\Program Files\Ampps\www\App\Controllers\Home.php(23): Core\View::renderTemplate()
+#6 [internal function]: App\Controllers\Home->indexAction()
+#7 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#8 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#9 C:\Program Files\Ampps\www\public\index.php(43): Core\Router->dispatch()
+#10 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Model.php' on line 27
+[26-Apr-2022 19:56:03 UTC] Uncaught exception: 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'karoljec_home-budget-admin'@'localhost' (using password: YES)'
+Stack trace: #0 C:\Program Files\Ampps\www\Core\Model.php(27): PDO->__construct()
+#1 C:\Program Files\Ampps\www\App\Models\User.php(241): Core\Model::getDB()
+#2 C:\Program Files\Ampps\www\App\Auth.php(100): App\Models\User::findByID()
+#3 C:\Program Files\Ampps\www\Core\View.php(53): App\Auth::getUser()
+#4 C:\Program Files\Ampps\www\Core\View.php(35): Core\View::getTemplate()
+#5 C:\Program Files\Ampps\www\App\Controllers\Home.php(23): Core\View::renderTemplate()
+#6 [internal function]: App\Controllers\Home->indexAction()
+#7 C:\Program Files\Ampps\www\Core\Controller.php(51): call_user_func_array()
+#8 C:\Program Files\Ampps\www\Core\Router.php(121): Core\Controller->__call()
+#9 C:\Program Files\Ampps\www\public\index.php(43): Core\Router->dispatch()
+#10 {main}
+Thrown in 'C:\Program Files\Ampps\www\Core\Model.php' on line 27
