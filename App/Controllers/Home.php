@@ -21,6 +21,7 @@ class Home extends \Core\Controller
     {
 		//\App\Mail::send('karol.jeczmionka@o2.pl','test','tis is','<h1>gggg<h1>');
         View::renderTemplate('Home/index.html');
+		
     }
 
 }

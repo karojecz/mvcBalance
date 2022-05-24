@@ -5,34 +5,56 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Auth;
 use \App\Flash;
-use \App\Models\balanceModel;
-use \App\Models\ExpenseModel;
+use \App\Models\BalanceModel;
+use \App\Models\expenseModel;
 use \App\Models\incomeModel;
 
-class Balance extends Authenticated
+class Balance extends Authenticated 
 {
-	
-	
+
 
 	public static function render_data($date, $title)
 	{
-		//balanceModel::testMailer();
-		View::renderTemplate('balance/balance.html',[
-		'expenses'=>balanceModel::findExpense($date['start date'],$date['end date']),
-		'incomes'=>balanceModel::findIncome($date['start date'],$date['end date']),
-		'expense_sums'=>balanceModel::findExpensesSums($date['start date'],$date['end date']),
-		'income_sums'=>balanceModel::findIncomeSums($date['start date'],$date['end date']),
+		
+		$expense_sum=BalanceModel::findOverallExpenseSum($date['start date'],$date['end date']);
+		$income_sum=BalanceModel::findOverallIncomeSum($date['start date'],$date['end date']);
+		$balance=$income_sum-$expense_sum;
+		$income_sums=BalanceModel::findIncomeSums($date['start date'],$date['end date']);
+		
+		$alert_class="alert alert-info";
+		$alert_info="Your balance equals zero";
+		if($balance>0){
+			$alert_class="alert alert-success";
+			$alert_info="Yours incomes are bigger than expenses. Success!";
+		}
+		if($balance<0){
+			$alert_class="alert alert-danger";
+			$alert_info="Warrning! Your expenses are bigger than incomes.";
+		}
+		
+		View::renderTemplate('Balance/Balance.html',[
+		'expenses'=>BalanceModel::findExpense($date['start date'],$date['end date']),
+		'incomes'=>BalanceModel::findIncome($date['start date'],$date['end date']),
+		'expense_sums'=>BalanceModel::findExpensesSums($date['start date'],$date['end date']),
+		'income_sums'=>$income_sums,
+		'income_sum'=>$income_sum,
+		'expense_sum'=>$expense_sum,
+		'balance'=>$balance,
 		'dropbox'=>true,
+		'alert_class'=>$alert_class,
+		'alert_info'=>$alert_info,
 		'title'=>$title
 		
 		]);	
 		
 	}
 
+
 	public function thisMonthAction()
 	{
 		balance::render_data(balance::this_month(), 'This month');
-		//var_dump(balanceModel::findExpense('2020-01-01','2022-04-29'));
+		//var_dump(BalanceModel::findIncomeSums('2020-01-01','2022-12-12'));
+
 		
 	}
 	public function lastMonthAction()
@@ -54,11 +76,13 @@ class Balance extends Authenticated
 	public function expenseAction()
     {
 		
-        View::renderTemplate('balance/expense.html',[
-			'categorys'=>balanceModel::getCategorys("expenses_category_assigned_to_users"),
-			'payment_methods'=>balanceModel::getCategorys('payment_methods_assigned_to_users'),
+		
+        View::renderTemplate('Balance/Expense.html',[
+			'categorys'=>BalanceModel::getCategorys("expenses_category_assigned_to_users"),
+			'payment_methods'=>BalanceModel::getCategorys('payment_methods_assigned_to_users'),
 			'time'=>date("Y-m-d"),
 		]);
+		
 		
 	
 		
@@ -67,8 +91,8 @@ class Balance extends Authenticated
 	
 	public function incomeAction()
     {
-        View::renderTemplate('balance/income.html',[
-			'categorys'=>balanceModel::getCategorys('incomes_category_assigned_to_users'),
+        View::renderTemplate('Balance/Income.html',[
+			'categorys'=>BalanceModel::getCategorys('incomes_category_assigned_to_users'),
 			'time'=>date("Y-m-d"),
 		]);
 					
@@ -80,10 +104,10 @@ class Balance extends Authenticated
 		
 		if($expense->save_expense()){
 			Flash::addMessage('Item added');
-			$this->redirect('/balance/expense');
+			$this->redirect('/Balance/Expense');
 			
 		}else{
-			     View::renderTemplate('/balance/expense.html', [
+			     View::renderTemplate('/Balance/Expense.html', [
                 'expense' => $expense,
 				'payment_methods'=>ExpenseModel::getCategorys('payment_methods_assigned_to_users'),
 				'time'=>date("Y-m-d"),
@@ -98,10 +122,10 @@ class Balance extends Authenticated
 		
 		if($expense->save_income()){
 			Flash::addMessage('Item added');
-			$this->redirect('/balance/income');
+			$this->redirect('/Balance/Income');
 			
 		}else{
-			     View::renderTemplate('/balance/income.html', [
+			     View::renderTemplate('/Balance/Income.html', [
                 'income' => $income,			
 				'time'=>date("Y-m-d"),
 				]);
@@ -112,13 +136,13 @@ class Balance extends Authenticated
   public static function  getDoubleCalender()
   {
 	 
-			$date=$_POST['datefilter'];
+			//$date=$_POST['start_date'];
 			
-			$date=explode("/",$date);
+			//$date=explode("/",$date);
 			
 			$array = array(
-			"start date" => $date[0],
-			"end date" => $date[1],
+			"start date" => $_POST['start_date'],
+			"end date" => $_POST['end_date'],
 			);
 		
 			return $array;

@@ -1,24 +1,34 @@
-$(function() {
+ function date_validation(){
+	
+	
+			
+			var first_date=document.getElementById('start_date').value;
+			var end_date=document.getElementById('end_date').value;
+			
 
-  $('input[name="datefilter"]').daterangepicker({
-      autoUpdateInput: false,
-      locale: {
-          cancelLabel: 'Clear'
-      }
-  });
+			if(first_date==false || end_date==false)
+			{
+				$('#date_alert_empty').show('fade');
+				
+				setTimeout(function () {
+				$('#date_alert_empty').hide('fade');
+				}, 2000);
+					
+			}
+			else if(first_date>end_date)
+			{
+				$('#date_alert').show('fade');
+				
+				setTimeout(function () {
+				$('#date_alert').hide('fade');
+				}, 2000);
 
-	$('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-	
-		 
-	
-	 $(this).val(picker.startDate.format('YYYY-MM-DD') + ' / ' + picker.endDate.format('YYYY-MM-DD'));
-	
-	
-      document.getElementById('date_range').submit();
-  });
-  
-  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-      $(this).val('');
-  });
-
-});
+				
+			}
+			else{
+				
+				document.getElementById("date_form").submit();
+			}
+			
+			
+		}

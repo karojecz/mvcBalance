@@ -22,7 +22,10 @@ data.addColumn('number', 'Sum');
 
 
   // Optional; add a title and set the width and height of the chart
-  var options = {'title':"Your expenses" };
+  var options = {
+	  'title':"Your expenses",
+	  'legend': 'top'   
+	  };
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));

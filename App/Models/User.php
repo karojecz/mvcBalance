@@ -58,6 +58,9 @@ class User extends \Core\Model
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
+			
+			
+			
 
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
@@ -65,14 +68,20 @@ class User extends \Core\Model
             $stmt->bindValue(':activation_hash', $hashed_token, PDO::PARAM_STR);
 			
 			/*DODANE PRZEZ MNIE tutaj do konta uzytkownika zostaja dodane domyslne kategorie*/
-			User::saveCategorysNames('expenses_category_default','expenses_category_assigned_to_users');
 			
-			User::saveCategorysNames("incomes_category_default","incomes_category_assigned_to_users");
 			
-			User::saveCategorysNames("payment_methods_default","payment_methods_assigned_to_users");
 			
 
-            return $stmt->execute();
+           // return $stmt->execute();
+             $result=$stmt->execute();
+			 $id = $db->lastInsertId();
+			 User::save_categorys('incomes_category_default',$id);
+			 User::save_categorys('expenses_category_default',$id);
+			 User::save_categorys('payment_methods_default',$id);
+			 //var_dump($id); 
+			// var_dump(User::str_replace_test('incomes_category_default',$id)); 
+			 
+			 return $result;
 			
 			
         }
@@ -85,6 +94,7 @@ class User extends \Core\Model
 	*
 	*
 	*/
+	/*
 	protected static function getCategorysNames($table_name)
 	{
 			$sql = 'SELECT name FROM '.$table_name.'';
@@ -101,18 +111,51 @@ class User extends \Core\Model
 
 			return $stmt->fetchAll();
 	}
+	*/
 	/*ZAPISANE DOMYSLNYCH KATEGORI DO BAZY DANYCH
 	*
 	*
 	*
 	*
 	*/
+	protected static function save_categorys($table_name,$id)
+	{
+		$name_target_table=str_replace('_default','_assigned_to_users',$table_name);
+
+		$sql = 'INSERT INTO '.$name_target_table.'(user_id, name) SELECT id, name FROM '.$table_name.'';
+		$db = static::getDB();
+		$stmt = $db->prepare($sql);
+		
+		$stmt->execute();
+		 
+		$number_of_inser_rows = $stmt->rowCount();
+		User::updating_rows($number_of_inser_rows,$name_target_table,$id);
+		 
+
+		
+	}
+	protected static function updating_rows($count,$table_name,$id)
+	{
+		$sql='UPDATE '.$table_name.' SET user_id='.$id.'
+				ORDER BY id DESC
+				LIMIT '.$count.'';
+		$db = static::getDB();
+		$stmt = $db->prepare($sql);
+		
+		$stmt->execute();
+	}
+	
+
+	/*
 	protected static function saveCategorysNames($name_first_table, $name_second_table)
 	{
-		$categorys=User::getCategorysNames($name_first_table);
 		
+		$categorys=User::getCategorysNames($name_first_table);
+					
 				$sql = 'INSERT INTO '.$name_second_table.' (user_id, name)
-						VALUES (10, :categorys)';
+						VALUES (:user_id, :categorys)';
+						
+						
 				$db = static::getDB();
 				
 					foreach($categorys as $value=>$key)
@@ -120,12 +163,14 @@ class User extends \Core\Model
 						$stmt = $db->prepare($sql);
 							
 						$stmt->bindvalue(':categorys', $key['name'], PDO::PARAM_STR);
-						//$stmt->bindValue(':name_second_table', $name_second_table, PDO::PARAM_STR);
+						$stmt->bindValue(':user_id','10' , PDO::PARAM_INT);
 						$stmt->execute();
 					}	
 	}
+	*/
+	
 
-    /**
+    /*
      * Validate current property values, adding valiation error messages to the errors array property
      *
      * @return void

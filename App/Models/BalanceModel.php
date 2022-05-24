@@ -128,6 +128,38 @@ class BalanceModel extends \Core\Model
 						
 		return $result;
 	}
+	public static function findOverallExpenseSum($start_date, $end_date)
+	{
+		$array=BalanceModel::findExpensesSums($start_date, $end_date);
+						$sum=BalanceModel::sumsAllItems($array);
+						return $sum;
+	}
+	public static function findOverallIncomeSum($start_date, $end_date)
+	{
+		$array=BalanceModel::findIncomeSums($start_date, $end_date);
+						$sum=BalanceModel::sumsAllItems($array);
+						return $sum;
+	}
+	public static function checkBalance($expenseSum, $incomeSum)
+	{
+		$balance=$incomeSum-$expenseSum;
+		return $balance;
+	}
+	public static function sumsAllItems($array)
+	{
+		$sum=0;
+
+		foreach($array as $item){
+			foreach($item as $key=>$value){
+										
+										  
+				$sum+= floatval($value);
+										
+				}
+		}
+		
+		return $sum;
+	}
 	
 	
 	public static function getCategorys($table_name)

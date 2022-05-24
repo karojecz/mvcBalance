@@ -66,32 +66,31 @@ $mg = new Mailgun(Config::MAILGUN_API_KEY, $adapter);
 
 
 						$mail = new PHPMailer;
-						$mail->CharSet = "UTF-8";
+						//$mail->CharSet = "UTF-8";
 						
 						$mail->SMTPOptions = [
-    'ssl' => [
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true,
-    ]
-];
+									'ssl' => [
+										'verify_peer' => false,
+										'verify_peer_name' => false,
+										'allow_self_signed' => true,
+									]
+								];
 
 						$mail->IsSMTP();
 						$mail->SMTPAutoTLS = false;
 						//$mail->Host = 'smtp.mailtrap.io';
-						$mail->Host = 'smtp.gmail.com'; # Gmail SMTP host
-						$mail->Port = 465; # Gmail SMTP port
+						$mail->Host = 'budget.karol-jeczmionka.pl'; # Gmail SMTP host
+						$mail->Port = 587; # Gmail SMTP port
 						//$mail->Port = 2525; 
 						$mail->SMTPAuth = true; # Enable SMTP authentication / Autoryzacja SMTP
 						//$mail->SMTPDebug = 4;
 						
-						$mail->SMTPSecure = 'ssl';
-						$mail->Username = "karojecz@gmail.com"; # Gmail username (e-mail) / Nazwa użytkownika
-						$mail->Password = "29karol19"; # Gmail password / Hasło użytkownika
+						$mail->SMTPSecure = 'tls';
+						$mail->Username = "budget@karol-jeczmionka.pl"; # Gmail username (e-mail) / Nazwa użytkownika
+						$mail->Password = "lorak@123"; # Gmail password / Hasło użytkownika
 						
-						//$mail->SMTPSecure = 'tls';
-
-						$mail->From = 'karojecz@gmail.com'; # REM: Gmail put Your e-mail here
+						
+						$mail->From = 'budget@karol-jeczmionka.pl'; # REM: Gmail put Your e-mail here
 						//$mail->setFrom ('info@mailtrap.io', 'Mailtrap'); # REM: Gmail put Your e-mail here
 						$mail->FromName = 'karol'; # Sender name
 						$mail->AddAddress($to, 'Karol Jeczmionka'); # # Recipient (e-mail address + name) / Odbiorca (adres e-mail i nazwa)

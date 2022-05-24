@@ -39,16 +39,38 @@
             /**
               * Show password toggle button
               */
+			  /*
             $('#inputPassword').hideShowPassword({
                 show: false,
                 innerToggle: 'focus'
+				
             });
+			*/
+			        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#inputPassword");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+            
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+		        const form = document.querySelector("form");
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+
         });
     </script>
 
 {% endblock %}
 
 {% block body %}
+
+   <div class="container mt-5">
+	<div class="col-md-5 mx-auto">
 
     <h1>Sign up</h1>
 
@@ -63,21 +85,42 @@
 
     <form method="post" action="/signup/create" id="formSignup">
 
-        <div class="form group">
-            <label for="inputName">Name</label>
-            <input id="inputName" name="name" placeholder="Name" autofocus value="{{ user.name }}" required />
+        <div class="form group form group form-outline mb-4">
+            <label class="form-label" for="inputName">Name</label>
+            <input class="form-control" id="inputName" name="name" placeholder="Name" autofocus value="{{ user.name }}" required />
+			
         </div>
-        <div class="form group">
-            <label for="inputEmail">Email address</label>
-            <input id="inputEmail" name="email" placeholder="email address" value="{{ user.email }}" required type="email" />
+        <div class="form group form-outline mb-4">
+            <label class="form-label" for="inputEmail">Email address</label>
+            <input class="form-control" id="inputEmail" name="email" placeholder="email address" value="{{ user.email }}" required type="email" />
         </div>
-        <div class="form group">
-            <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" name="password" placeholder="Password" required />
-        </div>
+		
+			
+				<div class="form group form-outline mb-4 " >
+				<div class="pass-icon">
+					<label class="form-label" for="inputPassword">Password</label>
+					 
+					<input class="form-control" type="password" id="inputPassword" name="password" placeholder="Password" required />
+					
+					<div class="ic">
+					<i class="bi bi-eye-slash" id="togglePassword"></i>
+					</div>
+				</div>	
+				
+				</div>
 
-        <button type="submit" class="bnt bnt-default">Sign up</button>
 
+
+			
+				
+
+			
+		<div class="row mb-4">
+
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+		</div>
     </form>
+	</div>
+	</div>
 
 {% endblock %}

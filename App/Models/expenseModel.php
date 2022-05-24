@@ -44,11 +44,15 @@ class ExpenseModel extends BalanceModel
 
             return $stmt->execute();
 			}
+			else{
+				$this->errors[] = 'sql error ';
 			return false;
+			}
+	}
 	}
 			
 			
-	}
+	
         
 	
 	
