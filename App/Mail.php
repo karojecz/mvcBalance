@@ -87,7 +87,7 @@ $mg = new Mailgun(Config::MAILGUN_API_KEY, $adapter);
 						
 						$mail->SMTPSecure = 'tls';
 						$mail->Username = "budget@karol-jeczmionka.pl"; # Gmail username (e-mail) / Nazwa użytkownika
-						$mail->Password = "lorak@123"; # Gmail password / Hasło użytkownika
+						$mail->Password = "..."; # Gmail password / Hasło użytkownika
 						
 						
 						$mail->From = 'budget@karol-jeczmionka.pl'; # REM: Gmail put Your e-mail here

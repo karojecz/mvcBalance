@@ -1,3 +1,13 @@
+  $( function() {
+    $( ".inp_date" ).datepicker({
+		
+		dateFormat: "yy-mm-dd"
+		
+	});
+  } );
+  
+
+
  function date_validation(){
 	
 	
